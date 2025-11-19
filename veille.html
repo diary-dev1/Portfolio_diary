@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veille Technologique - Emma Dubois</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Fira+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+
+  <style>
+    body{font-family:'Inter',sans-serif;background:#0a0f0d;color:#e0e0e0;margin:0;padding:0}
+    .nav{background:rgba(0,0,0,.95);backdrop-filter:blur(10px);padding:1.2rem 2rem;position:fixed;top:0;width:100%;z-index:1000;display:flex;justify-content:center;border-bottom:1px solid rgba(1,255,192,.2)}
+    .nav ul{list-style:none;display:flex;gap:2rem}
+    .nav a{color:#e0e0e0;text-decoration:none;font-family:'Fira Mono',monospace;font-weight:700;text-transform:uppercase;font-size:.85rem;position:relative}
+    .nav a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:#01ffc0;transition:.3s}
+    .nav a:hover{color:#01ffc0}
+    .nav a:hover::after{width:100%}
+    .hamburger{display:none;cursor:pointer;font-size:1.6rem;color:#e0e0e0}
+    .content{padding:8rem 2rem 4rem;max-width:1000px;margin:0 auto}
+    h1{font-size:4rem;text-align:center;margin-bottom:3rem;background:linear-gradient(135deg,#fff,#01ffc0);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+
+    .veille-card{background:rgba(30,42,36,.8);border:1px solid rgba(1,255,192,.2);border-radius:16px;padding:2rem;margin:2rem 0}
+    .veille-card h2{color:#01ffc0;font-size:1.8rem;margin-bottom:1rem}
+
+    footer{background:#000;padding:2rem;text-align:center;color:#666;border-top:2px solid rgba(1,255,192,.3)}
+
+    @media(max-width:768px){
+      .hamburger{display:block}
+      .nav ul{display:none;flex-direction:column;position:absolute;top:60px;left:0;width:100%;background:rgba(0,0,0,.98);padding:2rem}
+      .nav ul.active{display:flex}
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="hamburger">☰</div>
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="projets.html">Projets</a></li>
+      <li><a href="veille.html">Veille Tech</a></li>
+      <li><a href="glpi.html">GLPI</a></li>
+      <li><a href="synthese.html">Synthèse</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="content">
+    <h1>Veille Technologique</h1>
+
+    <!-- Veille 1 -->
+    <div class="veille-card">
+      <h2>Veille Technologique 2025 — Intelligence Artificielle</h2>
+      <p>
+        En 2025, l'intelligence artificielle continue de transformer le développement web et la cybersécurité. 
+        Les nouveaux agents IA comme Devin, OpenAI Assistants et GitHub Copilot X permettent d'automatiser 
+        des tâches complexes : génération de code, tests, documentation et optimisation des performances.
+        Les entreprises adoptent également massivement le Zero Trust et des systèmes de protection contre 
+        les attaques par IA (deepfake, phishing intelligent).
+      </p>
+    </div>
+
+    <!-- Veille 2 -->
+    <div class="veille-card">
+      <h2>Veille Technologique 2025 — Nouvelles Technologies Web</h2>
+      <p>
+        En 2025, les technologies web évoluent rapidement : Bun remplace progressivement Node.js grâce à 
+        sa rapidité, WebAssembly devient essentiel pour les applications hautes performances, et les frameworks modernes 
+        comme Astro, SvelteKit et Next.js dominent le marché grâce à leur efficacité et leur rendu côté serveur. 
+        L’Edge Computing (Vercel Edge, Cloudflare Workers) permet maintenant d'exécuter du code au plus près de l'utilisateur.
+      </p>
+    </div>
+
+    <!-- Google Alerts -->
+    <div class="veille-card">
+      <h2>Google Alerts — Comment je fais ma veille</h2>
+      <p>
+        J'utilise Google Alerts pour recevoir automatiquement des actualités sur les technologies que je surveille.  
+        Voici les alertes que j'ai configurées :
+      </p>
+      <ul>
+        <li>« Tendances développement web 2025 »</li>
+        <li>« Nouvelles cyberattaques »</li>
+        <li>« IA générative actualités »</li>
+        <li>« Bun vs Node.js »</li>
+        <li>« WebAssembly performance »</li>
+        <li>« Frameworks JavaScript 2025 »</li>
+      </ul>
+      <p>
+        Ces alertes me permettent de rester à jour quotidiennement sur les nouveautés du web, de l’IA et de la cybersécurité.
+      </p>
+    </div>
+
+  </div>
+
+  <footer>© 2025 Emma Dubois</footer>
+
+  <script>
+    const lenis = new Lenis({duration:1.4,smooth:true});
+    function raf(t){lenis.raf(t);requestAnimationFrame(raf);}requestAnimationFrame(raf);
+    document.querySelector('.hamburger').onclick=()=>document.querySelector('.nav ul').classList.toggle('active');
+  </script>
+
+</body>
+</html>

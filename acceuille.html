@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diary | Portfolio Développeur</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Fira+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="image/emma-photo.jpg" as="image">
+  <link rel="preload" href="image/projet-emma1.jpg" as="image">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Inter',sans-serif;background:#0a0f0d;color:#e0e0e0;overflow-x:hidden;line-height:1.7}
+
+    /* Navigation */
+    .nav{background:rgba(0,0,0,.95);backdrop-filter:blur(10px);padding:1.2rem 2rem;position:fixed;top:0;width:100%;z-index:1000;display:flex;justify-content:center;border-bottom:1px solid rgba(1,255,192,.2);box-shadow:0 4px 20px rgba(0,0,0,.3)}
+    .nav ul{list-style:none;display:flex;gap:2rem;align-items:center}
+    .nav a{color:#e0e0e0;text-decoration:none;font-family:'Fira Mono',monospace;font-weight:700;text-transform:uppercase;font-size:.85rem;transition:all .3s;position:relative;padding:.5rem 0}
+    .nav a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:#01ffc0;transition:width .3s}
+    .nav a:hover{color:#01ffc0}
+    .nav a:hover::after{width:100%}
+    .hamburger{display:none;cursor:pointer;font-size:1.6rem;color:#e0e0e0}
+
+    /* Hero Section */
+    .hero{min-height:100vh;display:flex;align-items:center;justify-content:space-between;padding:6rem 3rem 3rem;max-width:1300px;margin:0 auto;gap:4rem;position:relative}
+    .hero::before{content:'';position:absolute;top:20%;right:10%;width:400px;height:400px;background:radial-gradient(circle,rgba(1,255,192,.1),transparent);border-radius:50%;z-index:0;pointer-events:none}
+    .hero-content{z-index:1;max-width:600px}
+    .hero h1{font-size:5.5rem;font-weight:900;color:#fff;line-height:.9;letter-spacing:-5px;margin-bottom:1rem;background:linear-gradient(135deg,#fff,#01ffc0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .badge{font-family:'Fira Mono',monospace;color:#01ffc0;font-size:.95rem;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:2px;font-weight:700}
+    .hero-subtitle{font-size:1.2rem;color:#aaa;margin-bottom:2rem;font-weight:600;line-height:1.6}
+    .btn-group{display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap}
+    .btn{padding:.9rem 1.8rem;font-weight:700;text-transform:uppercase;font-size:.82rem;border-radius:8px;text-decoration:none;display:inline-block;transition:all .3s;font-family:'Fira Mono',monospace}
+    .btn.primary{background:#01ffc0;color:#000;border:2px solid #01ffc0}
+    .btn.secondary{border:2px solid #01ffc0;color:#01ffc0;background:transparent}
+    .btn:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(1,255,192,.4)}
+    .btn.primary:hover{background:#00d9a3}
+    .hero-image{position:relative;z-index:1}
+    .hero img{width:380px;height:380px;object-fit:cover;border:6px solid #01ffc0;border-radius:20px;box-shadow:0 20px 60px rgba(1,255,192,.3);transition:transform .3s}
+    .hero img:hover{transform:scale(1.02) rotate(-1deg)}
+
+    /* Sections */
+    .section{padding:5rem 2rem;display:flex;flex-direction:column;align-items:center;position:relative}
+    .section::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:80%;height:1px;background:linear-gradient(90deg,transparent,rgba(1,255,192,.3),transparent)}
+    h2{font-size:3rem;font-weight:900;color:#01ffc0;margin-bottom:3rem;text-align:center;text-transform:uppercase;letter-spacing:2px;position:relative;display:inline-block}
+    h2::after{content:'';position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);width:60%;height:4px;background:#01ffc0;border-radius:2px}
+
+    /* Projects Grid */
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2.5rem;max-width:1000px;width:100%;margin:0 auto;padding:0 1rem}
+    .card{background:linear-gradient(135deg,rgba(30,42,36,.8),rgba(20,30,25,.8));border:1px solid rgba(1,255,192,.2);border-radius:16px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.6);transition:all .4s;min-height:420px;display:flex;flex-direction:column;cursor:pointer;position:relative}
+    .card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent,rgba(1,255,192,.05));opacity:0;transition:opacity .3s}
+    .card:hover{transform:translateY(-10px);box-shadow:0 20px 50px rgba(1,255,192,.3);border-color:#01ffc0}
+    .card:hover::before{opacity:1}
+    .card img{width:100%;height:200px;object-fit:cover;border-bottom:3px solid #01ffc0;transition:transform .5s;background:#111}
+    .card:hover img{transform:scale(1.08)}
+    .card-content{padding:1.8rem;flex-grow:1;display:flex;flex-direction:column;justify-content:space-between;position:relative;z-index:2}
+    .card h3{font-size:1.5rem;color:#01ffc0;margin-bottom:1rem;font-weight:900;text-transform:uppercase;letter-spacing:1px}
+    .card p{color:#ccc;font-size:1rem;line-height:1.7;flex-grow:1;margin-bottom:1.2rem}
+    .card .btn{background:#01ffc0;color:#000;padding:.7rem 1.4rem;font-size:.8rem;align-self:flex-start;border:2px solid #01ffc0}
+    .card .btn:hover{background:#00cc99;transform:translateX(5px)}
+
+    /* Skills Section */
+    .skills{max-width:700px;width:100%;margin:2rem 0}
+    .skill{margin-bottom:2rem;background:rgba(30,42,36,.5);padding:1.5rem;border-radius:12px;border:1px solid rgba(1,255,192,.2);transition:all .3s}
+    .skill:hover{border-color:#01ffc0;background:rgba(30,42,36,.8)}
+    .skill-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem}
+    .skill span{font-weight:700;font-size:1.1rem;color:#01ffc0}
+    .skill-percent{font-family:'Fira Mono',monospace;color:#aaa;font-size:.9rem}
+    .bar{height:14px;background:#1a2520;border-radius:8px;overflow:hidden;box-shadow:inset 0 2px 4px rgba(0,0,0,.5)}
+    .progress{height:100%;background:linear-gradient(90deg,#01ffc0,#00d9a3);border-radius:8px;width:0;transition:width 2s ease;position:relative}
+    .progress::after{content:'';position:absolute;top:0;right:0;bottom:0;width:50%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3));animation:shimmer 2s infinite}
+    @keyframes shimmer{0%,100%{opacity:0}50%{opacity:1}}
+
+    /* About Section */
+    .about-content{max-width:800px;text-align:center;line-height:2;color:#ccc;font-size:1.1rem;background:rgba(30,42,36,.5);padding:2.5rem;border-radius:16px;border:1px solid rgba(1,255,192,.2)}
+    .about-content strong{color:#01ffc0}
+
+    /* Footer */
+    footer{background:#000;padding:3rem 2rem;display:flex;flex-wrap:wrap;justify-content:space-between;gap:2rem;font-size:.9rem;color:#aaa;border-top:2px solid rgba(1,255,192,.3)}
+    footer div{flex:1;min-width:200px}
+    footer strong{color:#01ffc0;display:block;margin-bottom:.5rem;font-size:1rem}
+    footer a{color:#01ffc0;text-decoration:none;transition:color .3s}
+    footer a:hover{color:#00d9a3;text-decoration:underline}
+
+    /* Responsive */
+    @media(max-width:768px){
+      .hero{flex-direction:column;text-align:center;padding-top:7rem;gap:2rem}
+      .hero::before{width:300px;height:300px;top:10%;right:0}
+      .hero h1{font-size:3.2rem;letter-spacing:-2px}
+      .hero-subtitle{font-size:1rem}
+      .hero img{width:280px;height:280px}
+      .btn-group{justify-content:center}
+      .nav ul{display:none;flex-direction:column;position:absolute;top:60px;left:0;width:100%;background:rgba(0,0,0,.98);padding:2rem;border-bottom:1px solid rgba(1,255,192,.3);gap:1rem}
+      .nav ul.active{display:flex}
+      .hamburger{display:block}
+      .grid{grid-template-columns:1fr;gap:2rem}
+      .card{min-height:380px}
+      .card img{height:180px}
+      .section{padding:4rem 1.5rem}
+      h2{font-size:2.2rem}
+      .about-content{padding:2rem;font-size:1rem}
+      footer{flex-direction:column;text-align:center}
+    }
+
+    /* Loading Animation */
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+    .hero-image{animation:float 6s ease-in-out infinite}
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="nav">
+    <div class="hamburger">☰</div>
+    <ul>
+      <li><a href="acceuille.html">Accueil</a></li>
+      <li><a href="projets.html">Projets</a></li>
+      <li><a href="veille.html">Veille Tech</a></li>
+      <li><a href="glpi.html">GLPI</a></li>
+      <li><a href="synthese.html">Synthèse</a></li>
+      <li><a href="contacts.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <header id="accueil" class="hero">
+    <div class="hero-content">
+      <div class="badge">BTS SIO – MCCI Business School</div>
+      <h1>SOJAVELO Rabelaza Diary Fanekena</h1>
+      <p class="hero-subtitle">Développeuse Web Full-Stack<br>Passionnée par l’UX/UI & le développement moderne</p>
+      <div class="btn-group">
+        <a href="CV.pdf" class="btn secondary">Télécharger CV</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="diary.jpg" alt="Emma Dubois - Développeuse Web" loading="lazy" onerror="this.src='https://via.placeholder.com/380?text=Emma+Dubois'">
+    </div>
+  </header>
+
+  <main>
+    <!-- PROJETS -->
+    
+
+    <!-- COMPÉTENCES -->
+    <section id="skills" class="section">
+      <h2>Compétences Techniques</h2>
+      <div class="skills">
+        <div class="skill">
+          <div class="skill-header">
+            <span>HTML5 / CSS3 </span>
+            <span class="skill-percent">90%</span>
+          </div>
+          <div class="bar"><div class="progress" data-width="90%"></div></div>
+        </div>
+
+        <div class="skill">
+          <div class="skill-header">
+            <span>JavaScript </span>
+            <span class="skill-percent">85%</span>
+          </div>
+          <div class="bar"><div class="progress" data-width="85%"></div></div>
+        </div>
+
+        <div class="skill">
+          <div class="skill-header">
+            <span>PHP / MySQL </span>
+            <span class="skill-percent">80%</span>
+          </div>
+          <div class="bar"><div class="progress" data-width="80%"></div></div>
+        </div>
+
+        <div class="skill">
+          <div class="skill-header">
+            <span>Node.js </span>
+            <span class="skill-percent">75%</span>
+          </div>
+          <div class="bar"><div class="progress" data-width="75%"></div></div>
+        </div>
+
+        <div class="skill">
+          <div class="skill-header">
+            <span>Java /python</span>
+            <span class="skill-percent">70%</span>
+          </div>
+          <div class="bar"><div class="progress" data-width="70%"></div></div>
+        </div>
+
+        <div class="skill">
+          <div class="skill-header">
+            <span>Figma / UI-UX Design</span>
+            <span class="skill-percent">80%</span>
+          </div>
+          <div class="bar"><div class="progress" data-width="80%"></div></div>
+        </div>
+
+        <div class="skill">
+          <div class="skill-header">
+            <span>Git / GitHub </span>
+            <span class="skill-percent">85%</span>
+          </div>
+          <div class="bar"><div class="progress" data-width="85%"></div></div>
+        </div>
+
+        <div class="skill">
+          <div class="skill-header">
+            <span>Analyse & Conception UML</span>
+            <span class="skill-percent">75%</span>
+          </div>
+          <div class="bar"><div class="progress" data-width="75%"></div></div>
+        </div>
+
+        <div class="skill">
+          <div class="skill-header">
+            <span>SQL / Bases de données</span>
+            <span class="skill-percent">80%</span>
+          </div>
+          <div class="bar"><div class="progress" data-width="80%"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- À PROPOS -->
+    <section id="about" class="section">
+      <h2>À propos de moi</h2>
+      <div class="about-content">
+        Je suis <strong>étudiant en BTS SIO SLAM</strong> passionné par le développement web et les technologies modernes. J'aime créer des sites interactifs et responsive tout en me concentrant sur l'expérience utilisateur. Mes projets me permettent d'appliquer mes connaissances en <strong>PHP, MySQL, JavaScript, React et Node.js</strong> tout en expérimentant de nouvelles idées.
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      <strong>Contact</strong>
+      <p>Email: <a href="mailto:sojavelo@example.com">sojavelo@example.com</a></p>
+      <p>Téléphone: +230 5X XX XX XX</p>
+    </div>
+    <div>
+      <strong>Réseaux</strong>
+      <a href="#">LinkedIn</a><br>
+      <a href="#">GitHub</a><br>
+      <a href="#">Twitter</a>
+    </div>
+    <div>
+      <strong>Copyright</strong>
+      <p>&copy; 2025 Sojavelo R. D. F. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Hamburger menu
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav ul');
+    hamburger.addEventListener('click', () => { navMenu.classList.toggle('active'); });
+
+    // Animate progress bars
+    window.addEventListener('load', () => {
+      document.querySelectorAll('.progress').forEach(bar => {
+        bar.style.width = bar.getAttribute('data-width');
+      });
+    });
+  </script>
+
+</body>
+</html>
