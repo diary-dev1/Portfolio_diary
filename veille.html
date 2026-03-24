@@ -20,15 +20,49 @@
     .content{padding:8rem 2rem 4rem;max-width:1000px;margin:0 auto}
     h1{font-size:4rem;text-align:center;margin-bottom:3rem;background:linear-gradient(135deg,#fff,#01ffc0);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 
-    .veille-card{background:rgba(30,42,36,.8);border:1px solid rgba(1,255,192,.2);border-radius:16px;padding:2rem;margin:2rem 0}
+    .veille-card{background:rgba(30,42,36,.8);border:1px solid rgba(1,255,192,.2);border-radius:16px;padding:2rem;margin:2rem 0;transition:border-color 0.3s, transform 0.3s;}
+    .veille-card:hover{border-color:rgba(1,255,192,.6);transform:translateY(-4px);}
     .veille-card h2{color:#01ffc0;font-size:1.8rem;margin-bottom:1rem}
+    .veille-card p{line-height:1.8;color:#c0c0c0;margin-bottom:1rem;}
+    .veille-card ul{color:#c0c0c0;line-height:2;padding-left:1.5rem;}
+    .veille-card ul li{margin-bottom:0.3rem;}
+
+    .veille-badge{
+      display:inline-block;
+      background:rgba(1,255,192,0.1);
+      border:1px solid rgba(1,255,192,0.4);
+      color:#01ffc0;
+      font-family:'Fira Mono',monospace;
+      font-size:0.75rem;
+      padding:4px 12px;
+      border-radius:20px;
+      margin-bottom:16px;
+      text-transform:uppercase;
+      letter-spacing:2px;
+    }
+
+    .source-link{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      color:#01ffc0;
+      font-size:0.85rem;
+      font-family:'Fira Mono',monospace;
+      text-decoration:none;
+      margin-top:12px;
+      opacity:0.7;
+      transition:opacity 0.2s;
+    }
+    .source-link:hover{opacity:1;}
 
     footer{background:#000;padding:2rem;text-align:center;color:#666;border-top:2px solid rgba(1,255,192,.3)}
 
     @media(max-width:768px){
+      h1{font-size:2.5rem;}
       .hamburger{display:block}
       .nav ul{display:none;flex-direction:column;position:absolute;top:60px;left:0;width:100%;background:rgba(0,0,0,.98);padding:2rem}
       .nav ul.active{display:flex}
+      .veille-card h2{font-size:1.4rem;}
     }
   </style>
 </head>
@@ -48,36 +82,95 @@
   <div class="content">
     <h1>Veille Technologique</h1>
 
-    <!-- Veille 1 -->
+    <!-- Veille 1 : Intelligence Artificielle -->
     <div class="veille-card">
+      <div class="veille-badge">01 — Intelligence Artificielle</div>
       <h2>Veille Technologique 2025 — Intelligence Artificielle</h2>
       <p>
-        En 2025, l'intelligence artificielle continue de transformer le développement web et la cybersécurité. 
-        Les nouveaux agents IA comme Devin, OpenAI Assistants et GitHub Copilot X permettent d'automatiser 
-        des tâches complexes : génération de code, tests, documentation et optimisation des performances.
-        Les entreprises adoptent également massivement le Zero Trust et des systèmes de protection contre 
-        les attaques par IA (deepfake, phishing intelligent).
+        En 2025, l'intelligence artificielle continue de transformer le développement web 
+        et la cybersécurité. Les nouveaux agents IA comme Devin, OpenAI Assistants et 
+        GitHub Copilot X permettent d'automatiser des tâches complexes : génération de code, 
+        tests, documentation et optimisation des performances.
+        Les entreprises adoptent également massivement le Zero Trust et des systèmes de 
+        protection contre les attaques par IA (deepfake, phishing intelligent).
       </p>
+      <p>
+        Les modèles de langage comme GPT-4o, Claude 3 et Gemini Ultra sont désormais 
+        intégrés directement dans les IDE et les plateformes cloud. L'IA générative permet 
+        de créer des interfaces utilisateur, générer des bases de données et produire 
+        automatiquement des tests unitaires.
+      </p>
+      <a href="https://openai.com" target="_blank" class="source-link">→ Source : OpenAI</a>
     </div>
 
-    <!-- Veille 2 -->
-     
+    <!-- Veille 2 : Développement Web -->
+    <div class="veille-card">
+      <div class="veille-badge">02 — Développement Web</div>
+      <h2>Veille Technologique 2025 — Développement Web</h2>
+      <p>
+        En 2025, le développement web évolue rapidement avec l'essor des frameworks modernes. 
+        Next.js 15, Astro et SvelteKit dominent le marché du rendu côté serveur (SSR) et 
+        de la génération statique (SSG). Le CSS continue de s'améliorer avec les Container 
+        Queries, les CSS Layers et les nouvelles fonctions de couleur.
+      </p>
+      <p>
+        WebAssembly (WASM) permet désormais d'exécuter des applications ultra-performantes 
+        directement dans le navigateur. PHP 8.3 apporte des améliorations significatives 
+        en termes de performance et de typage strict, tandis que les API REST et GraphQL 
+        restent incontournables pour les architectures modernes. Le mouvement "Web Components" 
+        gagne aussi en popularité pour créer des composants réutilisables natifs sans framework.
+      </p>
+      <p>
+        La sécurité web est également au cœur des préoccupations avec l'adoption massive 
+        de HTTPS, des Content Security Policy (CSP) et des protections contre les injections 
+        SQL et les attaques XSS.
+      </p>
+      <a href="https://developer.mozilla.org" target="_blank" class="source-link">→ Source : MDN Web Docs</a>
+    </div>
+
+    <!-- Veille 3 : Blockchain -->
+    <div class="veille-card">
+      <div class="veille-badge">03 — Blockchain & Web3</div>
+      <h2>Veille Technologique 2025 — Blockchain & Web3</h2>
+      <p>
+        La blockchain connaît une maturité croissante en 2025. Ethereum 2.0 avec son 
+        mécanisme de Proof of Stake a considérablement réduit la consommation énergétique 
+        des cryptomonnaies. Les Smart Contracts deviennent de plus en plus utilisés dans 
+        des secteurs comme la finance décentralisée (DeFi), la traçabilité des produits 
+        et la gestion des droits numériques (NFT).
+      </p>
+      <p>
+        Solana et Polygon émergent comme des alternatives rapides et moins coûteuses à 
+        Ethereum. Les entreprises explorent également les blockchains privées comme 
+        Hyperledger Fabric pour sécuriser leurs transactions internes.
+      </p>
+      <p>
+        Le concept de Web3 promet un internet décentralisé où les utilisateurs contrôlent 
+        leurs propres données sans intermédiaires. Les DAOs (Organisations Autonomes 
+        Décentralisées) permettent une gouvernance transparente et démocratique des 
+        projets numériques.
+      </p>
+      <a href="https://ethereum.org" target="_blank" class="source-link">→ Source : Ethereum.org</a>
+    </div>
 
     <!-- Google Alerts -->
     <div class="veille-card">
+      <div class="veille-badge">Méthodologie</div>
       <h2>Google Alerts — Comment je fais ma veille</h2>
       <p>
-        J'utilise Google Alerts pour recevoir automatiquement des actualités sur les technologies que je surveille.  
-        Voici les alertes que j'ai configurées :
+        J'utilise Google Alerts pour recevoir automatiquement des actualités sur les 
+        technologies que je surveille. Voici les alertes que j'ai configurées :
       </p>
       <ul>
         <li>« Tendances développement web 2025 »</li>
         <li>« Nouvelles cyberattaques »</li>
         <li>« IA générative actualités »</li>
-  
+        <li>« Blockchain Web3 2025 »</li>
+        <li>« PHP frameworks nouveautés »</li>
       </ul>
       <p>
-        Ces alertes me permettent de rester à jour quotidiennement sur les nouveautés du web, de l’IA et de la cybersécurité.
+        Ces alertes me permettent de rester à jour quotidiennement sur les nouveautés 
+        du web, de l'IA, de la blockchain et de la cybersécurité.
       </p>
     </div>
 
@@ -87,8 +180,24 @@
 
   <script>
     const lenis = new Lenis({duration:1.4,smooth:true});
-    function raf(t){lenis.raf(t);requestAnimationFrame(raf);}requestAnimationFrame(raf);
-    document.querySelector('.hamburger').onclick=()=>document.querySelector('.nav ul').classList.toggle('active');
+    function raf(t){lenis.raf(t);requestAnimationFrame(raf);}
+    requestAnimationFrame(raf);
+    document.querySelector('.hamburger').onclick=()=>
+      document.querySelector('.nav ul').classList.toggle('active');
+
+    // Animation GSAP au scroll
+    gsap.utils.toArray('.veille-card').forEach((card, i) => {
+      gsap.from(card, {
+        opacity: 0,
+        y: 40,
+        duration: 0.8,
+        delay: i * 0.1,
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 85%',
+        }
+      });
+    });
   </script>
 
 </body>
