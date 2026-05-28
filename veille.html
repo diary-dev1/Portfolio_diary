@@ -52,8 +52,23 @@
       margin-top:12px;
       opacity:0.7;
       transition:opacity 0.2s;
+      margin-right:16px;
     }
     .source-link:hover{opacity:1;}
+
+    .alert-demo{
+      background:rgba(1,255,192,0.05);
+      border:1px solid rgba(1,255,192,0.3);
+      border-radius:12px;
+      padding:1.2rem 1.5rem;
+      margin:1.2rem 0;
+      display:flex;
+      align-items:flex-start;
+      gap:12px;
+    }
+    .alert-demo .icon{font-size:1.5rem;flex-shrink:0;margin-top:2px;}
+    .alert-demo .alert-text{color:#c0c0c0;font-size:0.9rem;line-height:1.7;}
+    .alert-demo .alert-text strong{color:#01ffc0;}
 
     footer{background:#000;padding:2rem;text-align:center;color:#666;border-top:2px solid rgba(1,255,192,.3)}
 
@@ -82,96 +97,63 @@
   <div class="content">
     <h1>Veille Technologique</h1>
 
-    <!-- Veille 1 : Intelligence Artificielle -->
+    <!-- Veille unique : Cybersécurité -->
     <div class="veille-card">
-      <div class="veille-badge">01 — Intelligence Artificielle</div>
-      <h2>Veille Technologique 2025 — Intelligence Artificielle</h2>
+      <div class="veille-badge">01 — Cybersécurité</div>
+      <h2>Détection de connexions suspectes & sécurité des comptes</h2>
       <p>
-        En 2025, l'intelligence artificielle continue de transformer le développement web 
-        et la cybersécurité. Les nouveaux agents IA comme Devin, OpenAI Assistants et 
-        GitHub Copilot X permettent d'automatiser des tâches complexes : génération de code, 
-        tests, documentation et optimisation des performances.
-        Les entreprises adoptent également massivement le Zero Trust et des systèmes de 
-        protection contre les attaques par IA (deepfake, phishing intelligent).
+        La protection des comptes en ligne est devenue un enjeu majeur de cybersécurité en 2025.
+        Google et d'autres grandes plateformes ont renforcé leurs systèmes de surveillance 
+        des connexions grâce à des mécanismes de détection comportementale avancés.
       </p>
+
+      <div class="alert-demo">
+        <div class="icon">🔔</div>
+        <div class="alert-text">
+          <strong>Exemple concret observé :</strong> Google envoie automatiquement un email 
+          d'alerte lorsqu'une connexion depuis un nouvel appareil ou une nouvelle localisation 
+          est détectée sur un compte. Cette notification indique le type d'appareil (Windows, 
+          Android…) et invite l'utilisateur à vérifier ou sécuriser son compte.
+        </div>
+      </div>
+
+      <p>Ces systèmes s'appuient sur plusieurs technologies combinées :</p>
+      <ul>
+        <li><strong>Device fingerprinting</strong> — identification de l'appareil via son OS, navigateur, résolution d'écran</li>
+        <li><strong>Géolocalisation par IP</strong> — comparaison de la localisation habituelle avec la nouvelle connexion</li>
+        <li><strong>Analyse comportementale</strong> — détection d'anomalies par rapport aux habitudes de l'utilisateur</li>
+        <li><strong>OAuth 2.0 / Session tokens</strong> — gestion sécurisée des sessions par appareil</li>
+        <li><strong>Authentification à deux facteurs (2FA)</strong> — couche de sécurité supplémentaire en cas de doute</li>
+      </ul>
       <p>
-        Les modèles de langage comme GPT-4o, Claude 3 et Gemini Ultra sont désormais 
-        intégrés directement dans les IDE et les plateformes cloud. L'IA générative permet 
-        de créer des interfaces utilisateur, générer des bases de données et produire 
-        automatiquement des tests unitaires.
+        En tant que futur développeur, ces mécanismes sont directement applicables lors de 
+        la conception d'applications web sécurisées : journalisation des connexions, alertes 
+        email automatiques, gestion des sessions suspectes et conformité RGPD.
       </p>
-      <a href="https://openai.com" target="_blank" class="source-link">→ Source : OpenAI</a>
+      <a href="https://www.cnil.fr/fr/securite-authentifier-les-utilisateurs" target="_blank" class="source-link">→ Source : CNIL — Authentifier les utilisateurs</a>
+      <a href="https://www.cnil.fr/fr/consignes-pour-renforcer-la-securite-des-grandes-bases-de-donnees" target="_blank" class="source-link">→ Source : CNIL — Sécurité des bases de données 2025</a>
     </div>
 
-    <!-- Veille 2 : Développement Web -->
-    <div class="veille-card">
-      <div class="veille-badge">02 — Développement Web</div>
-      <h2>Veille Technologique 2025 — Développement Web</h2>
-      <p>
-        En 2025, le développement web évolue rapidement avec l'essor des frameworks modernes. 
-        Next.js 15, Astro et SvelteKit dominent le marché du rendu côté serveur (SSR) et 
-        de la génération statique (SSG). Le CSS continue de s'améliorer avec les Container 
-        Queries, les CSS Layers et les nouvelles fonctions de couleur.
-      </p>
-      <p>
-        WebAssembly (WASM) permet désormais d'exécuter des applications ultra-performantes 
-        directement dans le navigateur. PHP 8.3 apporte des améliorations significatives 
-        en termes de performance et de typage strict, tandis que les API REST et GraphQL 
-        restent incontournables pour les architectures modernes. Le mouvement "Web Components" 
-        gagne aussi en popularité pour créer des composants réutilisables natifs sans framework.
-      </p>
-      <p>
-        La sécurité web est également au cœur des préoccupations avec l'adoption massive 
-        de HTTPS, des Content Security Policy (CSP) et des protections contre les injections 
-        SQL et les attaques XSS.
-      </p>
-      <a href="https://developer.mozilla.org" target="_blank" class="source-link">→ Source : MDN Web Docs</a>
-    </div>
-
-    <!-- Veille 3 : Blockchain -->
-    <div class="veille-card">
-      <div class="veille-badge">03 — Blockchain & Web3</div>
-      <h2>Veille Technologique 2025 — Blockchain & Web3</h2>
-      <p>
-        La blockchain connaît une maturité croissante en 2025. Ethereum 2.0 avec son 
-        mécanisme de Proof of Stake a considérablement réduit la consommation énergétique 
-        des cryptomonnaies. Les Smart Contracts deviennent de plus en plus utilisés dans 
-        des secteurs comme la finance décentralisée (DeFi), la traçabilité des produits 
-        et la gestion des droits numériques (NFT).
-      </p>
-      <p>
-        Solana et Polygon émergent comme des alternatives rapides et moins coûteuses à 
-        Ethereum. Les entreprises explorent également les blockchains privées comme 
-        Hyperledger Fabric pour sécuriser leurs transactions internes.
-      </p>
-      <p>
-        Le concept de Web3 promet un internet décentralisé où les utilisateurs contrôlent 
-        leurs propres données sans intermédiaires. Les DAOs (Organisations Autonomes 
-        Décentralisées) permettent une gouvernance transparente et démocratique des 
-        projets numériques.
-      </p>
-      <a href="https://ethereum.org" target="_blank" class="source-link">→ Source : Ethereum.org</a>
-    </div>
-
-    <!-- Google Alerts -->
+    <!-- Méthodologie Google Alerts -->
     <div class="veille-card">
       <div class="veille-badge">Méthodologie</div>
       <h2>Google Alerts — Comment je fais ma veille</h2>
       <p>
-        J'utilise Google Alerts pour recevoir automatiquement des actualités sur les 
-        technologies que je surveille. Voici les alertes que j'ai configurées :
+        J'utilise Google Alerts pour recevoir automatiquement des actualités par email 
+        sur les technologies que je surveille. Voici les alertes que j'ai configurées :
       </p>
       <ul>
-        <li>« Tendances développement web 2025 »</li>
+        <li>« Détection connexion suspecte sécurité compte »</li>
+        <li>« Authentification deux facteurs 2FA nouveautés »</li>
+        <li>« OAuth sécurité 2025 »</li>
         <li>« Nouvelles cyberattaques »</li>
-        <li>« IA générative actualités »</li>
-        <li>« Blockchain Web3 2025 »</li>
-        <li>« PHP frameworks nouveautés »</li>
+        <li>« RGPD protection données personnelles »</li>
       </ul>
       <p>
-        Ces alertes me permettent de rester à jour quotidiennement sur les nouveautés 
-        du web, de l'IA, de la blockchain et de la cybersécurité.
+        Ces alertes me permettent de rester à jour sur les nouveautés en cybersécurité. 
+        Google Alerts envoie un email dès qu'un article correspond aux mots-clés configurés.
       </p>
+      <a href="https://alerts.google.com" target="_blank" class="source-link">→ Configurer Google Alerts</a>
     </div>
 
   </div>
@@ -185,7 +167,6 @@
     document.querySelector('.hamburger').onclick=()=>
       document.querySelector('.nav ul').classList.toggle('active');
 
-    // Animation GSAP au scroll
     gsap.utils.toArray('.veille-card').forEach((card, i) => {
       gsap.from(card, {
         opacity: 0,
