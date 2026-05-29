@@ -4,16 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Projets - Diary</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Fira+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;900&family=Fira+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
   <style>
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Inter',sans-serif;background:#0a0f0d;color:#e0e0e0;overflow-x:hidden;line-height:1.7}
-    
-    /* Navigation */
+    body{font-family:'Space Grotesk',sans-serif;background:#0a0f0d;color:#e0e0e0;overflow-x:hidden;line-height:1.7}
+
     .nav{background:rgba(0,0,0,.95);backdrop-filter:blur(10px);padding:1.2rem 2rem;position:fixed;top:0;width:100%;z-index:1000;display:flex;justify-content:center;border-bottom:1px solid rgba(1,255,192,.2);box-shadow:0 4px 20px rgba(0,0,0,.3)}
     .nav ul{list-style:none;display:flex;gap:2rem;align-items:center}
     .nav a{color:#e0e0e0;text-decoration:none;font-family:'Fira Mono',monospace;font-weight:700;text-transform:uppercase;font-size:.85rem;transition:all .3s;position:relative;padding:.5rem 0}
@@ -22,78 +21,68 @@
     .nav a:hover::after{width:100%}
     .hamburger{display:none;cursor:pointer;font-size:1.6rem;color:#e0e0e0}
 
-    /* Hero Projets */
-    .hero-projets{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:8rem 2rem 4rem;text-align:center;position:relative}
-    .hero-projets::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at 70% 30%,rgba(1,255,192,.1),transparent 70%);pointer-events:none}
-    .hero-projets h1{font-size:6rem;font-weight:900;background:linear-gradient(135deg,#fff,#01ffc0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem}
-    .hero-projets .title-with-icon{display:flex;align-items:center;justify-content:center;gap:1rem}
-    .hero-projets .title-with-icon::before{content:'';display:inline-block;width:25px;height:25px;background:#0066ff}
-    .hero-projets p{font-size:1.3rem;color:#aaa;max-width:800px}
+    .hero-projets{min-height:60vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:8rem 2rem 4rem;text-align:center;position:relative}
+    .hero-projets::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at 70% 30%,rgba(1,255,192,.07),transparent 65%);pointer-events:none}
+    .hero-projets h1{font-size:5.5rem;font-weight:900;background:linear-gradient(135deg,#fff 30%,#01ffc0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem;letter-spacing:-2px}
+    .hero-accent{display:inline-block;width:10px;height:10px;background:#01ffc0;margin-right:.6rem;vertical-align:middle;border-radius:2px}
+    .hero-projets p{font-size:1.1rem;color:#888;max-width:700px}
 
-    /* Container principal avec fond clair */
-    .projects-container{max-width:1400px;margin:0 auto 4rem;padding:3rem;background:rgba(220,210,220,0.95);border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+    .projects-container{max-width:1300px;margin:0 auto 6rem;padding:3rem 2rem}
+    .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem}
 
-    /* Grille de projets 2x2 */
-    .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2.5rem}
-    
-    /* Carte de projet */
-    .project-card{background:#fff;border-radius:15px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.2);transition:all 0.4s;position:relative}
-    .project-card::before{content:'';position:absolute;left:0;top:0;width:6px;height:100%;background:#0066ff;z-index:1}
-    .project-card:hover{transform:translateY(-10px);box-shadow:0 20px 50px rgba(0,0,0,0.3)}
-    
-    /* Header de carte */
-    .project-header{padding:1.8rem 2rem 1rem 2.5rem;background:#f8f8fa}
-    .project-header h3{font-size:1.4rem;color:#0066ff;margin-bottom:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.5px}
-    .project-header p{color:#666;line-height:1.6;font-size:0.9rem;max-height:120px;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical}
-    
-    /* Image du projet */
-    .project-image{width:100%;height:250px;background:#1a1a2e;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
-    .project-image img{width:100%;height:100%;object-fit:cover}
-    .project-image.placeholder{background:linear-gradient(135deg,#1a1a2e,#2d2d4d)}
-    .project-image.placeholder::after{content:'Image à venir';color:#888;font-size:1.2rem;font-style:italic}
-    
-    /* Stage 1 - Image spécifique */
-    .stage1-img{background:#e8f5f0 !important;padding:1.5rem;display:flex;align-items:center;justify-content:center}
-    .stage1-graphic{width:280px;height:220px;position:relative}
-    .stage1-screen{background:#fff;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,0.2);padding:1.2rem;width:100%;height:100%}
-    .stage1-header{background:#52c48c;color:#fff;padding:0.6rem;border-radius:5px;margin-bottom:0.8rem;font-weight:bold;display:flex;align-items:center;gap:0.5rem}
-    .stage1-title{font-size:1.1rem}
-    .stage1-content{background:#f0f0f0;padding:0.8rem;border-radius:5px;margin-bottom:0.6rem}
-    .stage1-content .incident-alert{color:#e74c3c;font-weight:bold;display:flex;align-items:center;gap:0.5rem;margin-bottom:0.4rem;font-size:0.9rem}
-    .stage1-content ul{list-style:none;padding-left:0.5rem}
-    .stage1-content li{padding:0.2rem 0;color:#555;font-size:0.85rem}
-    .stage1-content li::before{content:'•';color:#52c48c;margin-right:0.4rem}
-    .pdf-button{background:#52c48c;color:#fff;padding:0.4rem 0.8rem;border-radius:5px;text-align:center;font-weight:bold;display:inline-block;font-size:0.9rem}
-    
-    /* Boutons d'action */
-    .project-buttons{display:flex;gap:0.4rem;padding:1.2rem 1.5rem 1.5rem 2.5rem;background:#f8f8fa;flex-wrap:wrap}
-    .project-buttons a{background:#0066ff;color:#fff;padding:0.6rem 1rem;text-decoration:none;font-weight:600;font-size:0.85rem;transition:all 0.3s;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:0.4rem}
-    .project-buttons a:hover{background:#0052d4;transform:translateY(-2px)}
-    .project-buttons a.disabled{background:#999;cursor:not-allowed;opacity:0.5;pointer-events:none}
-    .project-buttons a.disabled:hover{transform:none;background:#999}
+    .project-card{background:#111814;border:1px solid rgba(1,255,192,.1);border-radius:16px;overflow:hidden;transition:all .4s cubic-bezier(.25,.8,.25,1);position:relative;display:flex;flex-direction:column}
+    .project-card:hover{transform:translateY(-6px);border-color:rgba(1,255,192,.35);box-shadow:0 20px 50px rgba(0,0,0,.5),0 0 0 1px rgba(1,255,192,.1)}
 
-    /* Footer */
+    .project-visual{height:180px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;flex-shrink:0}
+    .project-visual .big-icon{font-size:4.5rem;opacity:.18;position:absolute;right:2rem;bottom:-.5rem;line-height:1}
+    .project-visual .badge-num{position:absolute;top:1.2rem;left:1.5rem;font-family:'Fira Mono',monospace;font-size:.75rem;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:2px}
+    .project-visual .visual-title{font-size:2.8rem;font-weight:900;letter-spacing:-2px;text-transform:uppercase;position:relative;z-index:1}
+    .project-visual .visual-subtitle{font-size:.8rem;font-family:'Fira Mono',monospace;text-transform:uppercase;letter-spacing:2px;position:absolute;bottom:1.2rem;left:1.5rem;opacity:.6}
+
+    .visual-supercar{background:linear-gradient(135deg,#0d1b2a,#162a3d);color:#4a9eff}
+    .visual-vms{background:linear-gradient(135deg,#0f1a10,#1a3020);color:#01ffc0}
+    .visual-stage1{background:linear-gradient(135deg,#1a0f0a,#2d1a10);color:#ff7a3d}
+    .visual-stage2{background:linear-gradient(135deg,#130d1a,#221530);color:#c084fc}
+
+    .project-tags{display:flex;flex-wrap:wrap;gap:.4rem;padding:1.2rem 1.5rem .5rem}
+    .tag{font-family:'Fira Mono',monospace;font-size:.72rem;padding:.25rem .6rem;border-radius:4px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+    .tag-php{background:rgba(119,84,182,.15);color:#b39ddb;border:1px solid rgba(119,84,182,.3)}
+    .tag-mysql{background:rgba(0,117,143,.15);color:#4dd0e1;border:1px solid rgba(0,117,143,.3)}
+    .tag-js{background:rgba(240,220,30,.1);color:#f9e03b;border:1px solid rgba(240,220,30,.25)}
+    .tag-css{background:rgba(1,255,192,.08);color:#01ffc0;border:1px solid rgba(1,255,192,.2)}
+    .tag-java{background:rgba(255,122,61,.12);color:#ff7a3d;border:1px solid rgba(255,122,61,.25)}
+    .tag-bootstrap{background:rgba(121,82,179,.12);color:#9b6fd4;border:1px solid rgba(121,82,179,.3)}
+    .tag-pdf{background:rgba(229,57,53,.12);color:#ef5350;border:1px solid rgba(229,57,53,.25)}
+
+    .project-body{padding:.8rem 1.5rem 1rem;flex:1}
+    .project-body h3{font-size:1.2rem;color:#fff;font-weight:700;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.5px}
+    .project-body p{color:#888;font-size:.88rem;line-height:1.65;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+
+    .project-sep{height:1px;background:rgba(1,255,192,.08);margin:0 1.5rem}
+
+    .project-buttons{display:flex;flex-wrap:wrap;gap:.5rem;padding:1rem 1.5rem 1.3rem}
+    .btn{font-family:'Fira Mono',monospace;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:.45rem .9rem;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:.35rem;transition:all .25s;border:1px solid transparent}
+    .btn-primary{background:rgba(1,255,192,.12);color:#01ffc0;border-color:rgba(1,255,192,.3)}
+    .btn-primary:hover{background:rgba(1,255,192,.22);border-color:#01ffc0;transform:translateY(-1px)}
+    .btn-secondary{background:rgba(255,255,255,.05);color:#aaa;border-color:rgba(255,255,255,.12)}
+    .btn-secondary:hover{background:rgba(255,255,255,.1);color:#fff;transform:translateY(-1px)}
+    .btn i{font-size:.85rem}
+
     footer{background:#000;padding:3rem 2rem;display:flex;flex-wrap:wrap;justify-content:center;gap:3rem;color:#aaa;font-size:.9rem;border-top:2px solid rgba(1,255,192,.3);text-align:center}
     footer strong{color:#01ffc0;display:block;margin-bottom:.5rem}
 
-    /* Responsive */
-    @media(max-width:1100px){
-      .projects-grid{grid-template-columns:1fr;gap:2rem}
-    }
+    @media(max-width:1000px){.projects-grid{grid-template-columns:1fr}}
     @media(max-width:768px){
-      .hero-projets h1{font-size:3.5rem}
+      .hero-projets h1{font-size:3.2rem}
       .hamburger{display:block}
       .nav ul{display:none;flex-direction:column;position:absolute;top:60px;left:0;width:100%;background:rgba(0,0,0,.98);padding:2rem;gap:1rem}
       .nav ul.active{display:flex}
       .projects-container{padding:1.5rem 1rem}
-      .project-buttons{flex-direction:column}
-      .project-buttons a{width:100%;justify-content:center}
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation -->
   <nav class="nav">
     <div class="hamburger">☰</div>
     <ul>
@@ -105,117 +94,121 @@
     </ul>
   </nav>
 
-  <!-- Hero -->
   <header class="hero-projets">
-    <h1 class="title-with-icon">Projets</h1>
-    <p>Découvrez tous mes travaux réalisés pendant mon BTS SIO – du front-end moderne au back-end robuste</p>
+    <h1><span class="hero-accent"></span>Projets</h1>
+    <p>Travaux réalisés pendant mon BTS SIO SLAM — du front-end moderne au back-end robuste</p>
   </header>
 
-  <!-- Container des projets -->
   <div class="projects-container">
-    <!-- Grille des projets -->
     <div class="projects-grid">
-      
+
       <!-- PROJET 1: SUPERCAR -->
       <div class="project-card">
-        <div class="project-header">
-          <h3>SUPERCAR</h3>
-          <p>SuperCar est un projet de site web vitrines dédié aux voitures de luxe, que j'ai développé dans le cadre de mon apprentissage du développement web. Ce projet a pour objectif de présenter des véhicules de prestige à travers une interface moderne et immersive, tout en offrant aux visiteurs la possibilité de réserver un essai en ligne. J'ai intégré plusieurs fonctionnalités interactives, comme un formulaire de demande d'essai sécurisé, un système de connexion et d'inscription des utilisateurs, ainsi qu'une gestion dynamique des fiches voitures via des scripts PHP et MySQLi. Ce projet m'a permis de mettre en pratique mes compétences en front-end et back-end, et de créer une expérience utilisateur fluide et professionnelle.</p>
+        <div class="project-visual visual-supercar">
+          <span class="badge-num">01 / PROJET</span>
+          <span class="visual-title">SUPERCAR</span>
+          <span class="visual-subtitle">PHP · MySQLi · WAMP</span>
+          <span class="big-icon"><i class="fas fa-car"></i></span>
         </div>
-        <div class="project-image">
-          <img src="supercar.jpg" alt="SuperCar" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none';">
+        <div class="project-tags">
+          <span class="tag tag-php">PHP</span>
+          <span class="tag tag-mysql">MySQLi</span>
+          <span class="tag tag-js">JavaScript</span>
+          <span class="tag tag-css">CSS</span>
         </div>
+        <div class="project-body">
+          <h3>Site vitrine & réservation</h3>
+          <p>Site web dédié aux voitures de luxe avec interface immersive, formulaire de réservation d'essai sécurisé, système de connexion/inscription et gestion dynamique des fiches via PHP/MySQLi.</p>
+        </div>
+        <div class="project-sep"></div>
         <div class="project-buttons">
-          <a href="https://fanekenasupercar.alwaysdata.net/" target="_blank">Site</a>
-          <a href="RAPPORTDEPROJET.pdf" target="_blank">rapport</a>
-          <a href="ContexteSupercar.pdf" target="_blank">contexte</a>
-          <a href="https://canva.link/wz7vwsjcxwjv7d9" target="_blank">présentation</a>
+          <a class="btn btn-primary" href="https://fanekenasupercar.alwaysdata.net/" target="_blank"><i class="fas fa-globe"></i>Site</a>
+          <a class="btn btn-secondary" href="RAPPORTDEPROJET.pdf" target="_blank"><i class="fas fa-file-pdf"></i>Rapport</a>
+          <a class="btn btn-secondary" href="ContexteSupercar.pdf" target="_blank"><i class="fas fa-file-alt"></i>Contexte</a>
+          <a class="btn btn-secondary" href="https://canva.link/wz7vwsjcxwjv7d9" target="_blank"><i class="fas fa-display"></i>Présentation</a>
         </div>
       </div>
 
       <!-- PROJET 2: VMS -->
       <div class="project-card">
-        <div class="project-header">
-          <h3>VMS</h3>
-          <p>Projet de système de gestion des visiteurs développé dans le cadre de ma formation. Cette application web permet de gérer efficacement les entrées et sorties des visiteurs dans une entreprise, avec un système de badges, de notifications et de rapports détaillés. Le projet intègre une interface moderne et resp</p>
+        <div class="project-visual visual-vms">
+          <span class="badge-num">02 / PROJET</span>
+          <span class="visual-title">VMS</span>
+          <span class="visual-subtitle">Visitor Management System</span>
+          <span class="big-icon"><i class="fas fa-id-badge"></i></span>
         </div>
-        <div class="project-image">
-          <img src="vms.jpg" alt="VMS" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none';">
+        <div class="project-tags">
+          <span class="tag tag-php">PHP</span>
+          <span class="tag tag-mysql">MySQL</span>
+          <span class="tag tag-bootstrap">Bootstrap</span>
+          <span class="tag tag-js">JavaScript</span>
         </div>
+        <div class="project-body">
+          <h3>Gestion des visiteurs</h3>
+          <p>Application web de gestion des entrées et sorties de visiteurs en entreprise. Inclut un système de badges, notifications et rapports détaillés avec une interface moderne et responsive.</p>
+        </div>
+        <div class="project-sep"></div>
         <div class="project-buttons">
-          <a href="site/vms/index.html" target="_blank">Site</a>
-          <a href="fichiers/vms_rapport.pdf" target="_blank">rapport</a>
-          <a href="fichiers/vms_contexte.pdf" target="_blank">contexte</a>
-          <a href="https://canva.link/cct8fidt9ziuor5" target="_blank">présentation</a>
+          <!-- Lien site VMS : à adapter si le dossier s'appelle différemment -->
+          <a class="btn btn-primary" href="site/vms/index.html" target="_blank"><i class="fas fa-globe"></i>Site</a>
+          <a class="btn btn-secondary" href="https://canva.link/cct8fidt9ziuor5" target="_blank"><i class="fas fa-display"></i>Présentation</a>
         </div>
       </div>
 
       <!-- PROJET 3: STAGE 1 -->
       <div class="project-card">
-        <div class="project-header">
-          <h3>STAGE 1</h3>
-          <p>Durant mon stage de 6 semaines à la SMMC Port de Toamasina, j'ai développé une plateforme web complète de gestion des incidents HSE qui a remplacé un système papier défaillant. Cette application PHP/MySQLi, avec interface responsive Bootstrap, inclut la déclaration d'incidents, un tableau de bord analytique, la génération automatique de rapports PDF et un système de logs pour la traçabilité complète. Le projet a permis une réduction de 70% du temps de déclaration d'incidents et 90% du temps de génération des rapports mensuels, avec un taux d'adoption de 95% par les utilisateurs du service HSE.</p>
+        <div class="project-visual visual-stage1">
+          <span class="badge-num">01 / STAGE</span>
+          <span class="visual-title">RISC HSE</span>
+          <span class="visual-subtitle">SMMC Toamasina · 6 semaines</span>
+          <span class="big-icon"><i class="fas fa-hard-hat"></i></span>
         </div>
-        <div class="project-image stage1-img">
-          <div class="stage1-graphic">
-            <div class="stage1-screen">
-              <div class="stage1-header">
-                <span>MC</span>
-                <span class="stage1-title">RISC</span>
-              </div>
-              <div class="stage1-content">
-                <div class="incident-alert">
-                  <i class="fas fa-exclamation-circle"></i>
-                  <span>INCIDENTS</span>
-                </div>
-                <ul>
-                  <li>Incident #1234</li>
-                  <li>Incident #1235</li>
-                  <li>Incident #1236</li>
-                </ul>
-              </div>
-              <div class="pdf-button">
-                <i class="fas fa-file-pdf"></i> PDF
-              </div>
-            </div>
-          </div>
+        <div class="project-tags">
+          <span class="tag tag-php">PHP</span>
+          <span class="tag tag-mysql">MySQLi</span>
+          <span class="tag tag-bootstrap">Bootstrap</span>
+          <span class="tag tag-pdf">PDF auto</span>
         </div>
+        <div class="project-body">
+          <h3>Plateforme incidents HSE</h3>
+          <p>Plateforme de gestion des incidents HSE au Port de Toamasina. Réduction de 70% du temps de déclaration et 90% du temps de génération des rapports PDF. Taux d'adoption : 95%.</p>
+        </div>
+        <div class="project-sep"></div>
         <div class="project-buttons">
-          <a href="https://kivamaty.alwaysdata.net/stage_partie1/" target="_blank">Site du projet</a>
-<a href="fichiers/stage1_bilan.pdf" target="_blank">Bilan du stage</a>
-<a href="fichiers/Attestationdestage.pdf" target="_blank">Attestation</a>
-<a href="fichiers/RAPPORTDESTAG1.pdf" target="_blank">Rapport de stage</a>
-<a href="presentation.pdf" target="_blank">Présentation PowerPoint (PDF)</a>
-
+          <a class="btn btn-primary" href="https://kivamaty.alwaysdata.net/stage_partie1/" target="_blank"><i class="fas fa-globe"></i>Site</a>
+          <a class="btn btn-secondary" href="Attestationdestage.pdf" target="_blank"><i class="fas fa-certificate"></i>Attestation</a>
+          <a class="btn btn-secondary" href="RAPPORTDESTAG1.pdf" target="_blank"><i class="fas fa-book"></i>Rapport</a>
+          <a class="btn btn-secondary" href="presentation.pdf" target="_blank"><i class="fas fa-display"></i>Présentation</a>
         </div>
       </div>
 
       <!-- PROJET 4: STAGE 2 -->
       <div class="project-card">
-        <div class="project-header">
-          <h3>STAGE 2</h3>
-          <p>J’ai effectué mon stage de deuxième année dans un restaurant situé à Kot Robert, où j’ai participé à la conception d’une application en Java dédiée à la gestion des stocks.
-Cette application permet de suivre les entrées et sorties des produits afin d’optimiser l’organisation et éviter les ruptures</p>
+        <div class="project-visual visual-stage2">
+          <span class="badge-num">02 / STAGE</span>
+          <span class="visual-title">STOCK MGR</span>
+          <span class="visual-subtitle">Kot Robert · Java</span>
+          <span class="big-icon"><i class="fas fa-boxes-stacked"></i></span>
         </div>
-        <div class="project-image">
-          <img src="stage2.jpg" alt="Stage 2" onerror="this.parentElement.classList.add('placeholder'); this.style.display='none';">
+        <div class="project-tags">
+          <span class="tag tag-java">Java</span>
+          <span class="tag tag-mysql">MySQL</span>
         </div>
-      
-          <div class="project-buttons">
-          <a href="site/stage1/index.html" target="_blank">Site</a>
-          <a href="fichiers/stage1_bilan.pdf" target="_blank">Bilan</a>
-          <a href="fichiers/stage1_attestation.pdf" target="_blank">Attestation</a>
-          <a href="fichiers/stage1_rapport.pdf" target="_blank">rapport</a>
-          <a href="https://canva.link/jainz67h94eylg8" target="_blank">présentation</a>
+        <div class="project-body">
+          <h3>Gestion des stocks</h3>
+          <p>Application Java développée pour un restaurant à Kot Robert. Suivi des entrées et sorties des produits pour optimiser l'organisation et éviter les ruptures de stock.</p>
+        </div>
+        <div class="project-sep"></div>
+        <div class="project-buttons">
+          <!-- Lien site stage2 : à adapter si le dossier existe -->
+          <a class="btn btn-primary" href="site/stage2/index.html" target="_blank"><i class="fas fa-globe"></i>Site</a>
+          <a class="btn btn-secondary" href="https://canva.link/jainz67h94eylg8" target="_blank"><i class="fas fa-display"></i>Présentation</a>
         </div>
       </div>
 
-      <!-- Vous pouvez ajouter d'autres projets ici en suivant le même modèle -->
-      
     </div>
   </div>
 
-  <!-- Footer -->
   <footer>
     <div>
       <strong>Contact</strong>
@@ -235,22 +228,20 @@ Cette application permet de suivre les entrées et sorties des produits afin d�
   </footer>
 
   <script>
-    // Lenis - Smooth scroll
     const lenis = new Lenis({duration:1.4,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smooth:true});
     function raf(t){lenis.raf(t);requestAnimationFrame(raf);}requestAnimationFrame(raf);
 
-    // Animations GSAP
-    gsap.from('.hero-projets h1', {opacity:0,y:60,duration:1.2,ease:'power3.out'});
-    gsap.from('.hero-projets p', {opacity:0,y:40,duration:1,delay:0.5});
+    gsap.from('.hero-projets h1',{opacity:0,y:60,duration:1.2,ease:'power3.out'});
+    gsap.from('.hero-projets p',{opacity:0,y:40,duration:1,delay:0.4});
 
-    // Animation des cartes au scroll
     gsap.utils.toArray('.project-card').forEach((card,i)=>{
-      gsap.from(card,{opacity:0,y:80,duration:0.9,delay:i*0.15,ease:'power2.out',
-        scrollTrigger:{trigger:card,start:'top 85%'}}
-      );
+      gsap.from(card,{
+        opacity:0,y:70,duration:0.85,
+        delay:i*0.12,ease:'power2.out',
+        scrollTrigger:{trigger:card,start:'top 88%'}
+      });
     });
 
-    // Menu mobile
     document.querySelector('.hamburger').addEventListener('click',()=>{
       document.querySelector('.nav ul').classList.toggle('active');
     });
