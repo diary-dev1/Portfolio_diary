@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tableau de Synthèse - Diary</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;900&family=Fira+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Space Grotesk',sans-serif;background:#0a0f0d;color:#e0e0e0;overflow-x:hidden;line-height:1.7;display:flex;flex-direction:column;min-height:100vh}
+
+    /* NAV */
+    .nav{background:rgba(0,0,0,.95);backdrop-filter:blur(10px);padding:1.2rem 2rem;position:fixed;top:0;width:100%;z-index:1000;display:flex;justify-content:center;border-bottom:1px solid rgba(1,255,192,.2);box-shadow:0 4px 20px rgba(0,0,0,.3)}
+    .nav ul{list-style:none;display:flex;gap:2rem;align-items:center}
+    .nav a{color:#e0e0e0;text-decoration:none;font-family:'Fira Mono',monospace;font-weight:700;text-transform:uppercase;font-size:.85rem;transition:all .3s;position:relative;padding:.5rem 0}
+    .nav a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:#01ffc0;transition:width .3s}
+    .nav a:hover{color:#01ffc0}
+    .nav a:hover::after{width:100%}
+    .nav a.active{color:#01ffc0}
+    .nav a.active::after{width:100%}
+    .hamburger{display:none;cursor:pointer;font-size:1.6rem;color:#e0e0e0}
+
+    /* HERO */
+    .hero{padding:8rem 2rem 2.5rem;text-align:center;position:relative}
+    .hero::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at 30% 40%,rgba(1,255,192,.07),transparent 60%);pointer-events:none}
+    .hero h1{font-size:4.5rem;font-weight:900;background:linear-gradient(135deg,#fff 30%,#01ffc0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-2px;margin-bottom:.8rem}
+    .hero p{color:#888;font-size:1rem;max-width:600px;margin:0 auto 1.5rem}
+
+    /* TOOLBAR */
+    .toolbar{display:flex;justify-content:center;gap:1rem;margin-bottom:2rem;flex-wrap:wrap}
+    .btn{font-family:'Fira Mono',monospace;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:.5rem 1.1rem;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;transition:all .25s;border:1px solid transparent;cursor:pointer}
+    .btn-primary{background:rgba(1,255,192,.12);color:#01ffc0;border-color:rgba(1,255,192,.3)}
+    .btn-primary:hover{background:rgba(1,255,192,.22);border-color:#01ffc0;transform:translateY(-1px)}
+    .btn-secondary{background:rgba(255,255,255,.05);color:#aaa;border-color:rgba(255,255,255,.12)}
+    .btn-secondary:hover{background:rgba(255,255,255,.1);color:#fff;transform:translateY(-1px)}
+
+    /* PDF CONTAINER */
+    .pdf-wrapper{flex:1;max-width:1200px;width:100%;margin:0 auto;padding:0 2rem 4rem}
+    .pdf-frame-container{background:#111814;border:1px solid rgba(1,255,192,.15);border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 0 1px rgba(1,255,192,.05)}
+    .pdf-header{display:flex;align-items:center;gap:.8rem;padding:1rem 1.5rem;border-bottom:1px solid rgba(1,255,192,.1);background:rgba(1,255,192,.03)}
+    .pdf-header .dot{width:12px;height:12px;border-radius:50%}
+    .dot-red{background:#ff5f57}
+    .dot-yellow{background:#ffbd2e}
+    .dot-green{background:#28c840}
+    .pdf-header .filename{font-family:'Fira Mono',monospace;font-size:.8rem;color:#555;margin-left:.5rem}
+    .pdf-header .filename span{color:#01ffc0}
+
+    iframe{display:block;width:100%;height:80vh;border:none;background:#fff}
+
+    /* FALLBACK */
+    .pdf-fallback{display:none;padding:3rem;text-align:center;color:#888}
+    .pdf-fallback i{font-size:3rem;color:rgba(1,255,192,.3);margin-bottom:1rem;display:block}
+    .pdf-fallback p{margin-bottom:1.5rem}
+
+    /* FOOTER */
+    footer{background:#000;padding:2rem;text-align:center;color:#555;font-size:.85rem;border-top:1px solid rgba(1,255,192,.15)}
+    footer span{color:#01ffc0}
+
+    @media(max-width:768px){
+      .hero h1{font-size:2.8rem}
+      .hamburger{display:block}
+      .nav ul{display:none;flex-direction:column;position:absolute;top:60px;left:0;width:100%;background:rgba(0,0,0,.98);padding:2rem;gap:1rem}
+      .nav ul.active{display:flex}
+      .pdf-wrapper{padding:0 1rem 2rem}
+      iframe{height:70vh}
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="hamburger">☰</div>
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="projets.html">Projets</a></li>
+      <li><a href="tableau.html" class="active">Tableau de synthese</a></li>
+      <li><a href="veille.html">Veille Tech</a></li>
+      <li><a href="glpi.html">GLPI</a></li>
+      <li><a href="contacts.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero">
+    <h1>Tableau de Synthèse</h1>
+    <p>BTS SIO SLAM · Session 2026 · MCCI Business School Mauritius</p>
+    <div class="toolbar">
+      <a href="TableauSynthese_2542605414_Diary.pdf" download class="btn btn-primary">
+        <i class="fas fa-download"></i> Télécharger le PDF
+      </a>
+      <a href="TableauSynthese_2542605414_Diary.pdf" target="_blank" class="btn btn-secondary">
+        <i class="fas fa-external-link-alt"></i> Ouvrir dans un nouvel onglet
+      </a>
+    </div>
+  </div>
+
+  <div class="pdf-wrapper">
+    <div class="pdf-frame-container">
+      <div class="pdf-header">
+        <div class="dot dot-red"></div>
+        <div class="dot dot-yellow"></div>
+        <div class="dot dot-green"></div>
+        <span class="filename"><span>TableauSynthese</span>_2542605414_Diary.pdf</span>
+      </div>
+
+      <iframe
+        id="pdfFrame"
+        src="TableauSynthese_2542605414_Diary.pdf"
+        title="Tableau de Synthèse - SOJAVELO Rabelaza Diary Fanekena"
+      ></iframe>
+
+      <div class="pdf-fallback" id="fallback">
+        <i class="fas fa-file-pdf"></i>
+        <p>Votre navigateur ne peut pas afficher ce PDF directement.</p>
+        <a href="TableauSynthese_2542605414_Diary.pdf" download class="btn btn-primary">
+          <i class="fas fa-download"></i> Télécharger le PDF
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Portfolio de <span>Diary Fanekena Sojavelo</span> · BTS SIO SLAM 2026
+  </footer>
+
+  <script>
+    // Hamburger menu
+    document.querySelector('.hamburger').addEventListener('click', () => {
+      document.querySelector('.nav ul').classList.toggle('active');
+    });
+
+    // Si l'iframe échoue à charger le PDF → afficher le fallback
+    const frame = document.getElementById('pdfFrame');
+    frame.addEventListener('error', () => {
+      frame.style.display = 'none';
+      document.getElementById('fallback').style.display = 'block';
+    });
+  </script>
+
+</body>
+</html>
